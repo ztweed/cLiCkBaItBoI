@@ -6,6 +6,7 @@
 from selenium import webdriver
 from p4kRevs import p4kRevs
 from lxml import etree
+import os
 import urllib3 as urllib
 import xml.etree.ElementTree as ET
 import tweepy, time, sys, requests, lxml, ast
