@@ -28,10 +28,10 @@ acct = '@pitchfork'
 
 # my api stuff
 print("Authenticating API...")
-CONSUMER_KEY = 'WjETHpQTULNGGEq8mk4hfHta5'
-CONSUMER_SECRET = 'p7OKygKK1d4bzTbAzKPr9rORELpNNSSpH7fcaT2ZWkxTdeMWxi'
-ACCESS_KEY = '783659719848321024-EqYSGH8Hx1qJHJFmvI2GNE7eyiQlGuS'
-ACCESS_SECRET = 'hUYEqRo2fuvRjGasnx9oclNY5kCkSPBLvvShbO2Tz1wQy'
+CONSUMER_KEY = os.environ['CONSUMER_KEY']
+CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
+ACCESS_KEY = os.environ['ACCESS_KEY']
+ACCESS_SECRET = os.environ['ACCESS_SECRET']
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
