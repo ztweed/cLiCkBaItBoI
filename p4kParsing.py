@@ -38,7 +38,7 @@ auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
 print("Done!")
 
-## Get link from last tweet
+## Get link from last tweet!
 print("Retrieving tweets...")
 lrt     = api.user_timeline(acct, count = 20)
 twtText = lrt[15].text
