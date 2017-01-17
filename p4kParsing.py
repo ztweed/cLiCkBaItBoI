@@ -1,17 +1,15 @@
 ## BOT FOR PARSING P4K TWEETS ##
 
-## RUN EVERY FIVE MINUTES ##
-
 ## Prelims
 from selenium import webdriver
-from p4kRevs import p4kRevs
 from lxml import etree
+from apiKeys import *
 import os
 import urllib3 as urllib
 import xml.etree.ElementTree as ET
 import tweepy, time, sys, requests, lxml, ast
 
-# Handles REVIEWS
+# Deals with reviews
 def p4kRevs(xmlTree, xmlText, dct):
     headline = dct['headline'].upper()
     metaList = xmlTree.findall('head/meta')
@@ -29,20 +27,16 @@ acct = '@pitchfork'
 
 # my api stuff
 print("Authenticating API...")
-CONSUMER_KEY = os.environ['CONSUMER_KEY']
-CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
-ACCESS_KEY = os.environ['ACCESS_KEY']
-ACCESS_SECRET = os.environ['ACCESS_SECRET']
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
 print("Done!")
 
-## Get link from last tweet!
+## Get link from last tweet
 print("Retrieving tweets...")
 lrt     = api.user_timeline(acct, count = 20)
-twtText = lrt[15].text
-twtID   = lrt[15].id
+twtText = lrt[3].text
+twtID   = lrt[3].id
 delim   = 'http'
 parsTwt = twtText.split(delim,2)
 link    = delim + parsTwt[len(parsTwt)-1]
@@ -67,7 +61,7 @@ if host == "p4k.in":
     # Make Decisions Based on Article Type
     print("Writing tweet...")
     if myDict['articleSection'] == 'reviews':
-        myTweet = p4kHelps(xmlTree, xmlText, myDict)
+        myTweet = p4kRevs(xmlTree, xmlText, myDict)
         print("Done!")
         print("Sending Tweet...")
         myTweetLen = 136 - len(acct)
